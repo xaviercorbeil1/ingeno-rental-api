@@ -1,3 +1,3 @@
-interface RentalRepository  {
+export interface RentalRepository  {
     getRentals(): [];
 }

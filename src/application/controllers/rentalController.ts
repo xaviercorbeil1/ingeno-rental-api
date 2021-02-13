@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { RentalRepository } from "../repository/RentalRepository";
 
 
 export class RentalController {

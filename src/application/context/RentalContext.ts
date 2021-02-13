@@ -1,4 +1,5 @@
-import { RentalController } from "../controllers/rentalController"
+import { RentalController } from "../controllers/rentalController";
+import { CSVRentalRepository } from "../../infrastructure/CSVRentalRepository";
 
 export class RentalContext {
     rentalController: RentalController
