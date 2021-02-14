@@ -4,21 +4,22 @@ import * as dotenv from "dotenv";
 import {RentalContext} from  "./context/RentalContext";
 import * as homeController from "./controllers/home";
 
-const rentralContext =new RentalContext();
+const rentalContext =new RentalContext();
 
+dotenv.config();
 const app = express();
 
 // Express configuration
 app.set("port", process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-dotenv.config();
+
 
 /**
  * Primary app routes.
  */
 app.get("/", homeController.index);
-app.get("/rentals",rentralContext.rentalController.getRentals);
-app.get("/rentals/:id",rentralContext.rentalController.getRentalById);
+app.get("/rentals",rentalContext.getRentalController().getRentals);
+app.get("/rentals/:id",rentalContext.getRentalController().getRentalById);
 
 export default app;
