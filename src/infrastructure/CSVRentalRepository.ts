@@ -9,6 +9,9 @@ export class CSVRentalRepository implements RentalRepository {
 
     constructor(path : string) {
         fs.createReadStream(path)
+            .on("error", () => {
+                throw "Can't load database";
+            })
             .pipe(csv())
             .on("data", (row) => {
                 const rental: Rental = { id: row.id, city: row.city, postalCode: row.postalCode, price: row.price, nbBed: row.nb_beds, nbBath: row.nb_baths, owner: row.owner, rating: row.rating, description: row.description }
@@ -16,10 +19,8 @@ export class CSVRentalRepository implements RentalRepository {
             })
             .on("end", () => {
                 console.log("CSV done");
-            })
-            .on("error", () => {
-                console.log("error");
             });
+
     }
 
     getRentals(): Rental[] {
