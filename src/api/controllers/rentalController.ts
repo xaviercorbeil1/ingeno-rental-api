@@ -14,20 +14,13 @@ export class RentalController {
 
     getRentals = (req: Request, res: Response): void => {
         const rentalFilterBuilder = new RentalFilterBuilder();
-
         const query = req.query;
-        if(query.min_nb_beds) {
-            rentalFilterBuilder.withMinBed(Number(query.min_nb_beds.toString()));
-        }
-        if(query.postalcode) {
-            rentalFilterBuilder.withPostalCode(query.postalcode.toString());
-        }
-        if(query.min_price) {
-            rentalFilterBuilder.withMinPrice(Number(query.min_price.toString()));
-        }
-        if(query.max_price) {
-            rentalFilterBuilder.withMaxPrice(Number(query.max_price));
-        }
+
+        rentalFilterBuilder
+            .withPostalCode(query.postalcode && query.postalcode.toString())
+            .withMinBed(query.min_nb_beds && Number(query.min_nb_beds))
+            .withMinPrice(query.min_price && Number(query.min_price))
+            .withMaxPrice(query.min_price && Number(query.max_price));
 
         const rentals: Rental[] = this.rentalService.getRentalsFiltered(rentalFilterBuilder);
         res.send(rentals);
