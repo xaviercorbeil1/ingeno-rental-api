@@ -41,8 +41,6 @@ export class RentalController {
         } else {
             res.status(404).send("Rental not found");
         }
-
     };
-
 }
 
