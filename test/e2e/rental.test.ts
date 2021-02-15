@@ -1,6 +1,5 @@
 import request from "supertest";
-import app from "../src/app";
-import { expect} from "chai";
+import app from "../../src/app";
 
 describe("GET /rentals", () => {
     it("should return 200 OK", (done) => {

@@ -5,26 +5,35 @@ import Rental from "../domain/rental/rentals";
 
 export class CSVRentalRepository implements RentalRepository {
 
-    private rentals: Map<string, Rental> = new Map()
-
+    private rentals: Map<string, Rental> = new Map();
+    private path: string;
     constructor(path : string) {
-        fs.createReadStream(path)
-            .on("error", () => {
-                throw "Can't load database";
-            })
-            .pipe(csv())
-            .on("data", (row) => {
-                const rental: Rental = { id: row.id, city: row.city, postalCode: row.postalCode, price: row.price, nbBed: row.nb_beds, nbBath: row.nb_baths, owner: row.owner, rating: row.rating, description: row.description }
-                this.rentals.set(rental.id, rental);
-            })
-            .on("end", () => {
-                console.log("CSV done");
-            });
+        this.path = path;
+    }
 
+    async initDatabase(): Promise<void> {
+        return new Promise(((resolve) => {
+            fs.createReadStream(this.path)
+                .on("error", () => {
+                    throw new Error("Can't load database");
+                })
+                .pipe(csv())
+                .on("data", (row) => {
+                    const rental: Rental = { id: row.id, city: row.city, postalCode: row.postalcode, price: row.price, nbBed: row.nb_beds, nbBath: row.nb_baths, owner: row.owner, rating: row.rating, description: row.description }
+                    this.rentals.set(rental.id, rental);
+                })
+                .on("end", () => {
+                    resolve();
+                });
+        }));
     }
 
     getRentals(): Rental[] {
         return [...this.rentals.values()];
+    }
+
+    getRentalsFiltered(predicate: (rental: Rental) => boolean): Rental[] {
+        return [...this.rentals.values()].filter(value => predicate(value));
     }
 
     getRental(id: string): Rental {

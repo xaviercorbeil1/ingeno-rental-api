@@ -19,7 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
  * Primary app routes.
  */
 app.get("/", homeController.index);
-app.get("/rentals",rentalContext.getRentalController().getRentals);
-app.get("/rentals/:id",rentalContext.getRentalController().getRentalById);
+
+rentalContext.getRentalController().then(rentalController => {
+        app.get("/rentals",rentalController.getRentals);
+        app.get("/rentals/:id",rentalController.getRentalById);
+});
 
 export default app;
