@@ -5,8 +5,7 @@ export class RentalContext {
     private readonly rentalController: RentalController
 
     constructor() {
-        console.log("1");
-        const rentalRepository = new CSVRentalRepository();
+        const rentalRepository = new CSVRentalRepository("./db/rentals.csv");
         this.rentalController = new RentalController(rentalRepository);
     }
 

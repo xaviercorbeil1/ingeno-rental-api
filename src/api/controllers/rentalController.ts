@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { RentalRepository } from "../repository/RentalRepository";
-import Rental from "../models/rentals";
+import {RentalRepository} from "../../domain/rental/RentalRepository";
+import Rental from "../../domain/rental/rentals";
 
 
 export class RentalController {
@@ -18,6 +18,13 @@ export class RentalController {
 
     getRentalById = (req: Request, res: Response): void => {
         const id: string = req.params.id;
+        const rental: Rental = this.rentalRepository.getRental(id);
+        if(rental) {
+            res.send(rental);
+        } else {
+            res.status(404).send("Rental not found");
+        }
+
     };
 
 }

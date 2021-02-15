@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
-import {RentalContext} from  "./context/RentalContext";
-import * as homeController from "./controllers/home";
+import {RentalContext} from "./api/context/RentalContext";
+import * as homeController from "./api/controllers/home";
 
 const rentalContext =new RentalContext();
 

@@ -4,16 +4,15 @@
   "main": "server.ts",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/application/server.ts",
-    "debug": "nodemon --inspect=5858 -e ts,tsx --exec node -r ts-node/register ./src/application/server.ts"
+    "start": "nodemon src/server.ts",
+    "debug": "nodemon --inspect=5858 -e ts,tsx --exec node -r ts-node/register src/server.ts"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "csv-parser": "^3.0.0",
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
-    "express": "^4.17.1",
-    "winston": "^3.3.3"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/errorhandler": "^1.5.0",
