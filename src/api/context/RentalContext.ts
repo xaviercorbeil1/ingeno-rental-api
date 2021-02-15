@@ -1,15 +1,12 @@
 import { RentalController } from "../controllers/rentalController";
 import { CSVRentalRepository } from "../../infrastructure/CSVRentalRepository";
+import RentalService from "../../domain/rental/RentalService";
 
 export class RentalContext {
-    private readonly rentalController: RentalController
-
-    constructor() {
+    async getRentalController(): Promise<RentalController> {
         const rentalRepository = new CSVRentalRepository("./db/rentals.csv");
-        this.rentalController = new RentalController(rentalRepository);
-    }
-
-    getRentalController(): RentalController {
-        return this.rentalController;
+        await rentalRepository.initDatabase();
+        const rentalService = new RentalService(rentalRepository);
+        return new RentalController(rentalService);
     }
 }
