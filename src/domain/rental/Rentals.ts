@@ -1,4 +1,4 @@
-export default interface Rental {
+interface Rental {
     id: string;
     city: string;
     postalCode: string;
@@ -9,3 +9,5 @@ export default interface Rental {
     rating: number;
     description: string;
 }
+
+export default Rental;

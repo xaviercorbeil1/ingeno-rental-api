@@ -1,11 +1,10 @@
-import Rental from "../rentals";
+import Rental from "../Rentals";
 
 export default class RentalFilterBuilder {
     private minBed : number
     private postalCodeFilter: string
     private minPrice: number
     private maxPrice: number
-
 
     build() :(rental: Rental) => boolean {
         return  (rental: Rental): boolean => {
@@ -29,7 +28,6 @@ export default class RentalFilterBuilder {
     private isMaxPriceRentalInvalid = (rental:Rental) => {
         return this.maxPrice && rental.price > this.maxPrice;
     }
-
 
     private isPostalCodeRentalInvalid = (rental:Rental): boolean => {
         const postalCode = rental.postalCode;

@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
-import Rental from "../../domain/rental/rentals";
+import Rental from "../../domain/rental/Rentals";
 import RentalService from "../../domain/rental/RentalService";
 import RentalFilterBuilder from "../../domain/rental/filter/RentalFilterBuilder";
 
 
 export class RentalController {
-
     private readonly rentalService: RentalService;
 
     constructor(rentalRepository: RentalService) {
@@ -29,6 +28,7 @@ export class RentalController {
     getRentalById = (req: Request, res: Response): void => {
         const id: string = req.params.id;
         const rental: Rental = this.rentalService.getRental(id);
+
         if(rental) {
             res.send(rental);
         } else {

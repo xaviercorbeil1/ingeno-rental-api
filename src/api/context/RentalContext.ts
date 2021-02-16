@@ -1,4 +1,4 @@
-import { RentalController } from "../controllers/rentalController";
+import { RentalController } from "../controllers/RentalController";
 import { CSVRentalRepository } from "../../infrastructure/CSVRentalRepository";
 import RentalService from "../../domain/rental/RentalService";
 
