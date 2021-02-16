@@ -9,29 +9,39 @@ export default class RentalFilterBuilder {
 
     build() :(rental: Rental) => boolean {
         return  (rental: Rental): boolean => {
-            if(this.minBed && this.minBed >= rental.nbBed) {
-                return false;
-            } else if(this.minPrice && this.minPrice >= rental.price) {
-                return false;
-            } else if(this.maxPrice && this.maxPrice < rental.price) {
-                return false;
-            } else if (!this.isPostalCodeValid(rental.postalCode)){
-                return false;
-            }
-            return true;
+            const conditions = [this.isMinBedRentalInvalid,
+            this.isMinPriceRentalInvalid,
+            this.isMaxPriceRentalInvalid,
+            this.isPostalCodeRentalInvalid];
+
+            return conditions.every(x => !x(rental));
         };
     }
 
-    private isPostalCodeValid(postalCode:string): boolean {
+    private isMinBedRentalInvalid = (rental: Rental) => {
+        return this.minBed && rental.nbBed < this.minBed;
+    }
+
+    private isMinPriceRentalInvalid = (rental:Rental) => {
+        return this.minPrice && rental.price < this.minPrice;
+    }
+
+    private isMaxPriceRentalInvalid = (rental:Rental) => {
+        return this.maxPrice && rental.price > this.maxPrice;
+    }
+
+
+    private isPostalCodeRentalInvalid = (rental:Rental): boolean => {
+        const postalCode = rental.postalCode;
         if(this.postalCodeFilter && this.postalCodeFilter.length == 6) {
             for (let i = 0; i < 6; i++ ) {
                 const character = this.postalCodeFilter[i];
                 if (character != "_" && character != postalCode[i]) {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     withMinBed(nb: number): RentalFilterBuilder {
