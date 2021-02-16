@@ -33,7 +33,7 @@ export class CSVRentalRepository implements RentalRepository {
     }
 
     getRentalsFiltered(predicate: (rental: Rental) => boolean): Rental[] {
-        return [...this.rentals.values()].filter(value => predicate(value));
+        return [...this.rentals.values()].filter(predicate);
     }
 
     getRental(id: string): Rental {
