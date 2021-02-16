@@ -62,5 +62,4 @@ describe("RentalService tests", () => {
             expect(rentalReceive).toBe(rental);
         });
     });
-
 });

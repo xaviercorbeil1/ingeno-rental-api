@@ -22,20 +22,4 @@ describe("GET /rentals/id ", () => {
     });
 });
 
-//Todo filtered test
-
-
-
-// describe("POST /contact", () => {
-//     it("should return false from assert when no message is found", (done) => {
-//         request(app).post("/contact")
-//             .field("name", "John Doe")
-//             .field("email", "john@me.com")
-//             .end(function(err, res) {
-//                 expect(res.error).to.be.false;
-//                 done();
-//             })
-//             .expect(302);
-//
-//     });
-// });
+//Todo Avec plus de temps j'aurais fais des tests e2e pour les filters
