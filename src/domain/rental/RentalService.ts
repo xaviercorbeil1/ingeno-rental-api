@@ -1,4 +1,4 @@
-import {RentalRepository} from "./RentalRepository";
+import RentalRepository from "./RentalRepository";
 import Rental from "./Rentals";
 import RentalFilterBuilder from "./filter/RentalFilterBuilder";
 

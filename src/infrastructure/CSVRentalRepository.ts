@@ -1,4 +1,4 @@
-import { RentalRepository } from "../domain/rental/RentalRepository";
+import RentalRepository from "../domain/rental/RentalRepository";
 import fs from "fs";
 import csv from "csv-parser";
 import Rental from "../domain/rental/Rentals";
