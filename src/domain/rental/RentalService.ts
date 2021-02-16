@@ -10,8 +10,9 @@ export default class RentalService {
         this.rentalRepository = rentalRepository;
     }
 
-    getRentalsFiltered(filterBuilder: RentalFilterBuilder): Rental[] {
-        return this.rentalRepository.getRentalsFiltered(filterBuilder.build());
+    getRentalsFiltered(rentalFilterBuilder: RentalFilterBuilder): Rental[] {
+        const predicate = rentalFilterBuilder.build();
+        return this.rentalRepository.getRentalsFiltered(predicate);
     }
 
     getRental(id:string):Rental {

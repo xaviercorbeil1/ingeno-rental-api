@@ -1,6 +1,6 @@
 import Rental from "./Rentals";
 
-export interface RentalRepository  {
+export default interface RentalRepository  {
     getRentals(): Rental[];
 
     getRentalsFiltered(predicate: (rental: Rental) => boolean): Rental[];
