@@ -1,5 +1,5 @@
 import {CSVRentalRepository} from "../../../src/infrastructure/CSVRentalRepository";
-import Rental from "../../../src/domain/rental/rentals";
+import Rental from "../../../src/domain/rental/Rentals";
 
 
 describe("CSVRentalRepository tests", () => {

@@ -1,12 +1,13 @@
 import { RentalRepository } from "../domain/rental/RentalRepository";
 import fs from "fs";
 import csv from "csv-parser";
-import Rental from "../domain/rental/rentals";
+import Rental from "../domain/rental/Rentals";
 
 export class CSVRentalRepository implements RentalRepository {
 
     private rentals: Map<string, Rental> = new Map();
     private path: string;
+
     constructor(path : string) {
         this.path = path;
     }

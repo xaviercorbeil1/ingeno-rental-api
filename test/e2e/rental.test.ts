@@ -22,6 +22,8 @@ describe("GET /rentals/id ", () => {
     });
 });
 
+//Todo filtered test
+
 
 
 // describe("POST /contact", () => {

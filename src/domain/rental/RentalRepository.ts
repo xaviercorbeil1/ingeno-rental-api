@@ -1,4 +1,4 @@
-import Rental from "./rentals";
+import Rental from "./Rentals";
 
 export interface RentalRepository  {
     getRentals(): Rental[];
