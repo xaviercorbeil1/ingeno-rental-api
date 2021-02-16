@@ -46,4 +46,3 @@ curl http://localhost:8080/rentals?min_nb_beds=2&min_price=40
   > min_price=40
 - Appliquer un filtre pour retirer les propriétés dont le prix de location par nuit est supérieur à X\$.
   > max_price=40
-- Exemple : 
