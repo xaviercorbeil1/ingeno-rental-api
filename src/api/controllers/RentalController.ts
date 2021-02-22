@@ -1,9 +1,7 @@
 import {Request, Response} from "express";
 import Rental from "../../domain/rental/Rentals";
 import RentalService from "../../domain/rental/RentalService";
-import RentalFilterPredicateFactory from "../../domain/rental/filter/RentalFilterPredicateFactory";
 import RentalFilterDto from "../../domain/rental/RentalFilterDto";
-
 
 export class RentalController {
     private readonly rentalService: RentalService;
@@ -13,7 +11,6 @@ export class RentalController {
     }
 
     getRentals = (req: Request, res: Response): void => {
-        const rentalFilterBuilder = new RentalFilterPredicateFactory();
         const query = req.query;
 
         const rentalFilterDto: RentalFilterDto = {
