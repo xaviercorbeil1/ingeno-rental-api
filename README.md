@@ -1,9 +1,11 @@
 # Simple Rental API
+Modification 2/21/2021 :
+Je me suis rendu compte que d'avoir un prédicat dans la méthode getRentalsFiltered dans RentalRepository causerait des
+problèmes à long terme. Si on décide d'implémenter une base de données avec un Orm qui filtre les données lui-même, le
+prédicat ne sert plus et on aurait besoin des valeurs directement. Donc, mon changement vient contrer ce problème en
+passant un dto qui donne les données nécessaires.
 
 ## Description
-
-
-
 - Retourner l'ensemble des informations sur une propriété à louer.
 
 ```
