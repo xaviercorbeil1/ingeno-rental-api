@@ -1,12 +1,21 @@
 import Rental from "../Rentals";
 
-export default class RentalFilterBuilder {
+export default class RentalFilterPredicateFactory {
     private minBed : number
-    private postalCodeFilter: string
+    private postalCode: string
     private minPrice: number
     private maxPrice: number
 
-    build() :(rental: Rental) => boolean {
+    create(minBed: number, postalCode: string, minPrice: number, maxPrice: number): (rental: Rental) => boolean {
+        this.minBed = minBed;
+        this.postalCode = postalCode;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+
+        return this.buildPredicate();
+    }
+
+    private buildPredicate() :(rental: Rental) => boolean {
         return  (rental: Rental): boolean => {
             const conditions = [this.isMinBedRentalInvalid,
             this.isMinPriceRentalInvalid,
@@ -31,34 +40,14 @@ export default class RentalFilterBuilder {
 
     private isPostalCodeRentalInvalid = (rental:Rental): boolean => {
         const postalCode = rental.postalCode;
-        if(this.postalCodeFilter && this.postalCodeFilter.length == 6) {
+        if(this.postalCode && this.postalCode.length == 6) {
             for (let i = 0; i < 6; i++ ) {
-                const character = this.postalCodeFilter[i];
+                const character = this.postalCode[i];
                 if (character != "_" && character != postalCode[i]) {
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    withMinBed(nb: number): RentalFilterBuilder {
-        this.minBed = nb;
-        return this;
-    }
-
-    withPostalCode(postalCode: string): RentalFilterBuilder {
-        this.postalCodeFilter = postalCode;
-        return this;
-    }
-
-    withMinPrice(minPrice: number): RentalFilterBuilder {
-        this.minPrice = minPrice;
-        return this;
-    }
-
-    withMaxPrice(maxPrice: number): RentalFilterBuilder {
-        this.maxPrice = maxPrice;
-        return this;
     }
 }

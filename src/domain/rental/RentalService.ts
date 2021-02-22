@@ -1,6 +1,7 @@
 import RentalRepository from "./RentalRepository";
 import Rental from "./Rentals";
-import RentalFilterBuilder from "./filter/RentalFilterBuilder";
+import RentalFilterPredicateFactory from "./filter/RentalFilterPredicateFactory";
+import RentalFilterDto from "./RentalFilterDto";
 
 
 export default class RentalService {
@@ -10,9 +11,9 @@ export default class RentalService {
         this.rentalRepository = rentalRepository;
     }
 
-    getRentalsFiltered(rentalFilterBuilder: RentalFilterBuilder): Rental[] {
-        const predicate = rentalFilterBuilder.build();
-        return this.rentalRepository.getRentalsFiltered(predicate);
+    getRentalsFiltered(rentalFilterDTO: RentalFilterDto): Rental[] {
+
+        return this.rentalRepository.getRentalsFiltered(rentalFilterDTO);
     }
 
     getRental(id:string):Rental {

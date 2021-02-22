@@ -1,5 +1,6 @@
-import RentalFilterBuilder from "../../../../../src/domain/rental/filter/RentalFilterBuilder";
+import RentalFilterPredicateFactory from "../../../../../src/domain/rental/filter/RentalFilterPredicateFactory";
 import Rental from "../../../../../src/domain/rental/Rentals";
+import RentalFilterDto from "../../../../../src/domain/rental/RentalFilterDto";
 
 describe("RentalFilterBuilder tests", () => {
     const nbBed = 2;
@@ -13,62 +14,56 @@ describe("RentalFilterBuilder tests", () => {
         nbBed, rating: 4,
         nbBath, id: "1234"
     };
-    let rentalFilterBuilder: RentalFilterBuilder;
+    let rentalFilterPredicateFactory: RentalFilterPredicateFactory;
 
     beforeEach(() => {
-        rentalFilterBuilder = new RentalFilterBuilder();
+        rentalFilterPredicateFactory = new RentalFilterPredicateFactory();
     });
 
     describe("with min bed", () => {
         it("when valid should BeTruthy ", function () {
-            rentalFilterBuilder.withMinBed(nbBed);
+            const predicate = rentalFilterPredicateFactory.create(nbBed, undefined, undefined, undefined);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeTruthy();
         });
 
         it("when invalide should BeFalsy", function () {
-            rentalFilterBuilder.withMinBed(nbBed + 1);
+            const predicate = rentalFilterPredicateFactory.create(nbBed + 1, undefined, undefined, undefined);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeFalsy();
         });
     });
 
     describe("with min price", () => {
         it("when valid should BeTruthy ", function () {
-            rentalFilterBuilder.withMinPrice(price);
+            const predicate = rentalFilterPredicateFactory.create(undefined, undefined, price, undefined);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeTruthy();
         });
 
         it("when invalide should BeFalsy", function () {
-            rentalFilterBuilder.withMinPrice(price + 1);
+            const predicate = rentalFilterPredicateFactory.create(undefined, undefined, price + 1, undefined);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeFalsy();
         });
     });
 
     describe("with max price", () => {
         it("when valid should BeTruthy ", function () {
-            rentalFilterBuilder.withMaxPrice(price);
+            const predicate = rentalFilterPredicateFactory.create(undefined, undefined, undefined, price);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeTruthy();
         });
 
         it("when invalide should BeFalsy", function () {
-            rentalFilterBuilder.withMaxPrice(price - 1);
+            const predicate = rentalFilterPredicateFactory.create(undefined, undefined, undefined, price - 1);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeFalsy();
         });
     });
@@ -76,19 +71,17 @@ describe("RentalFilterBuilder tests", () => {
     describe("with postal code", () => {
         it("when valid should BeTruthy ", function () {
             const postalCodeValidFilter = "G3__G4";
-            rentalFilterBuilder.withPostalCode(postalCodeValidFilter);
+            const predicate = rentalFilterPredicateFactory.create(undefined, postalCodeValidFilter, undefined, undefined);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeTruthy();
         });
 
         it("when invalide should BeFalsy", function () {
             const postalCodeInvalidFilter = "G4__G4";
-            rentalFilterBuilder.withPostalCode(postalCodeInvalidFilter);
+            const predicate = rentalFilterPredicateFactory.create(undefined, postalCodeInvalidFilter, undefined, undefined);
 
-            const isValid = rentalFilterBuilder.build()(rental);
-
+            const isValid = predicate(rental);
             expect(isValid).toBeFalsy();
         });
     });
