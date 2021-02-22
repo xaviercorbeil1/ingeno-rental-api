@@ -1,19 +1,11 @@
-# Évaluation Technique
+# Simple Rental API
 Modification 2/21/2021 :
 Je me suis rendu compte que d'avoir un prédicat dans la méthode getRentalsFiltered dans RentalRepository causerait des
 problèmes à long terme. Si on décide d'implémenter une base de données avec un Orm qui filtre les données lui-même, le
 prédicat ne sert plus et on aurait besoin des valeurs directement. Donc, mon changement vient contrer ce problème en
 passant un dto qui donne les données nécessaires.
-## Énoncé
 
-L'objectif de ce test est d'évaluer vos aptitudes techniques dans leur ensemble en vous demandant de produire une API HTTP REST.
-
-Vous avez ci-joint le fichier `rentals.csv` qui contient les données nécessaires.
-
-> Il n'est pas nécessaire de vous intégrer avec quelconque service externe.
-
-Votre API doit implanter la(es) ressource(s) HTTP REST nécessaire(s) afin de pouvoir servir les fonctionnalités suivantes:
-
+## Description
 - Retourner l'ensemble des informations sur une propriété à louer.
 
 ```
@@ -33,7 +25,7 @@ curl http://localhost:8080/rentals/{id}
 - Retourner les informations de base sur toutes les propriétés à louer.
 
 ```
-curl http://localhost:8080/rentals
+curl http://localhost:8080/rentals?min_nb_beds=2&min_price=40
 [
     {
         "id": "guid are terrible ids",
@@ -56,33 +48,3 @@ curl http://localhost:8080/rentals
   > min_price=40
 - Appliquer un filtre pour retirer les propriétés dont le prix de location par nuit est supérieur à X\$.
   > max_price=40
-- Pouvoir appliquer un ou plusieurs des filtres cités plus haut dans une même requête.
-
-## Choix technologiques
-
-- Nous vous demandons d'utiliser un des langages de programmation du portefeuille technogique standard d'Ingeno:
-  - Java (Jersey)
-  - Node.js (Express)
-  - Python (Flask)
-  - Go (Standard)
-- Vous êtes libre d'utiliser toute librairie qui vous semble pertinente à la réalisation de la tâche.
-- Vous êtes libre d'utiliser l'architecture qui vous semble la mieux adaptée.
-
-## Points Importants
-
-- N'hésitez pas à produire un README.md pour vous assurer que nous pouvons comprendre vos hypothèses et décisions. Il est de votre responsabilité de clarifier les points qui ne sont pas évidents en nous posant des questions.
-- Il n'est pas primordial d'implémenter toutes les fonctionnalités, l'important est d'en faire le plus possible avec le temps alloué. La qualité est plus importante à nos yeux que la quantité.
-
-## Évaluation
-
-- Nous nous attendons que les règles de l'art du génie logiciel seront respectées.
-- Critères d'évaluation
-  - Le respect des besoins du client
-  - L'architecture de la solution
-  - La bonne utilisation des concepts du paradigme de programmation choisi
-  - Les tests automatisés
-  - Les standards de qualité du Clean Code
-
-## Livraison
-
-Nous vous demandons de partager votre travail dans un repo publique GitHub.
