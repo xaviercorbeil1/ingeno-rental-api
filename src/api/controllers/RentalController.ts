@@ -17,7 +17,7 @@ export class RentalController {
             postalCode: query.postalcode && query.postalcode.toString(),
             nbBed: query.min_nb_beds && Number(query.min_nb_beds),
             minPrice: query.min_price && Number(query.min_price),
-            maxPrice: query.min_price && Number(query.max_price)
+            maxPrice: query.max_price && Number(query.max_price)
         };
 
         const rentals: Rental[] = this.rentalService.getRentalsFiltered(rentalFilterDto);
